@@ -1,0 +1,225 @@
+/* Variables CSS para fácil personalización */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --text-color: #ecf0f1;
+    --bg-color: #1a1a2e;
+    --digit-bg: rgba(255, 255, 255, 0.1);
+    --digit-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-color), #16213e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fondo animado */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(231, 76, 60, 0.1) 0%, transparent 20%);
+    animation: bgPulse 15s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes bgPulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.reloj-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 90%;
+    width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-speed) ease;
+}
+
+.reloj {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    perspective: 500px;
+}
+
+.hora, .minuto, .segundo {
+    font-size: 5rem;
+    font-weight: 700;
+    background: var(--digit-bg);
+    padding: 15px 25px;
+    margin: 0 5px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), var(--digit-shadow);
+    min-width: 120px;
+    transition: all var(--transition-speed) ease;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.hora::before, .minuto::before, .segundo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+    z-index: -1;
+}
+
+.segundo {
+    color: var(--accent-color);
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(231, 76, 60, 0.3); }
+    100% { transform: scale(1.02); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(231, 76, 60, 0.6); }
+}
+
+.separador {
+    font-size: 4rem;
+    margin: 0 5px;
+    animation: blink 1s infinite;
+    color: var(--primary-color);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.fecha {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: transform var(--transition-speed);
+}
+
+.controles {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto de carga inicial */
+.reloj-container {
+    animation: appear 1.5s ease-out forwards;
+}
+
+@keyframes appear {
+    0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Estilos para formato 12h */
+.formato-12h .periodo {
+    font-size: 1.8rem;
+    margin-left: 10px;
+    display: inline-block;
+    min-width: 40px;
+    text-align: left;
+}
+
+/* Estilos alternativos */
+.reloj-container.estilo-alternativo {
+    --primary-color: #9b59b6;
+    --secondary-color: #8e44ad;
+    --accent-color: #1abc9c;
+    --bg-color: #2c3e50;
+    --digit-bg: rgba(0, 0, 0, 0.2);
+}
+
+.reloj-container.estilo-alternativo .hora, 
+.reloj-container.estilo-alternativo .minuto, 
+.reloj-container.estilo-alternativo .segundo {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(155, 89, 182, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hora, .minuto, .segundo {
+        font-size: 3.5rem;
+        padding: 12px 20px;
+        min-width: 90px;
+    }
+    
+    .separador {
+        font-size: 3rem;
+    }
+    
+    .reloj-container {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hora, .minuto, .segundo {
+        font-size: 2.5rem;
+        padding: 10px 15px;
+        min-width: 70px;
+    }
+    
+    .separador {
+        font-size: 2rem;
+    }
+    
+    .fecha {
+        font-size: 1.2rem;
+    }
+    
+    button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
