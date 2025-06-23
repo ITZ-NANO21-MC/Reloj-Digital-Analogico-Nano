@@ -89,5 +89,3 @@ Las contribuciones son bienvenidas. Sigue estos pasos:
 Este proyecto está bajo la licencia [MIT](LICENSE).
 
 ---
-
-**Nota**: Este reloj funciona mejor en navegadores modernos que soportan las últimas características de CSS3. Para capturas de pantalla reales, simplemente abre el proyecto en tu navegador y toma capturas en diferentes modos y tamaños de pantalla.
